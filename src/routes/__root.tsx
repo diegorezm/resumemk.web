@@ -31,7 +31,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "Resumemk",
       },
     ],
     links: [
@@ -48,7 +48,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         <ConvexProvider>
           <Outlet />
           <TanStackRouterDevtools />
-
           <TanStackQueryLayout />
         </ConvexProvider>
       </ClerkProvider>
