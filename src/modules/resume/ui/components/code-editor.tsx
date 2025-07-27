@@ -34,7 +34,7 @@ export function CodeEditor({
         minimap: {
           enabled: false,
         },
-        lineNumbers: "on",
+        lineNumbers: "off",
         glyphMargin: false,
         folding: false,
         lineDecorationsWidth: 10,

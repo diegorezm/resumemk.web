@@ -13,12 +13,13 @@ const cssReset = `
 `;
 
 interface Props {
+  title: string;
   markdown: string;
   css: string;
   iframeRef: RefObject<HTMLIFrameElement | null>;
 }
 
-export function MarkdownPreview({ markdown, css, iframeRef }: Props) {
+export function MarkdownPreview({ title, markdown, css, iframeRef }: Props) {
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
@@ -31,6 +32,9 @@ export function MarkdownPreview({ markdown, css, iframeRef }: Props) {
 			<!DOCTYPE html>
 			<html>
 			<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${title}</title>
       <style>${cssReset}</style>
 				<style>
 					${css}
@@ -45,7 +49,7 @@ export function MarkdownPreview({ markdown, css, iframeRef }: Props) {
     doc.open();
     doc.writeln(fullHtml);
     doc.close();
-  }, [markdown, css, iframeRef.current]);
+  }, [markdown, css, title, iframeRef.current]);
 
   return (
     <iframe
