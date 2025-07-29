@@ -34,6 +34,7 @@ export function EditorTabs({
   const tabs = isEditorFullScreen
     ? ["markdown", "css", "preview"]
     : ["markdown", "css"];
+
   return (
     <>
       <header className="flex justify-between items-center border-b px-2 h-10 bg-muted/50">
@@ -56,7 +57,12 @@ export function EditorTabs({
         </div>
         <Button
           type="button"
-          onClick={() => setEditorFullScreen(!isEditorFullScreen)}
+          onClick={() => {
+            setEditorFullScreen(!isEditorFullScreen);
+            if (activeTab === "preview") {
+              setActiveTab("markdown");
+            }
+          }}
           variant={"ghost"}
           size="icon"
         >

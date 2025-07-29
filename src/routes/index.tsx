@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@clerk/tanstack-react-start";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -6,8 +7,10 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
+  const auth = useAuth();
+
   return (
-    <main className="text-center max-w-7xl mx-auto">
+    <main className="text-center max-w-5xl mx-auto px-4">
       <section className="h-screen w-full space-y-6 flex flex-col justify-center items-center">
         <h1 className="text-5xl font-semibold">Welcome to Resume Maker!</h1>
         <p className="text-lg">
@@ -17,7 +20,7 @@ function App() {
         </p>
         <div className="space-x-4">
           {/* TODO: Send user to /dashboard if he is authenticated */}
-          <Link to="/resume/draft">
+          <Link to={auth.isSignedIn ? "/dashboard" : "/resume/draft"}>
             <Button size="lg">Get started!</Button>
           </Link>
           <a href="/">

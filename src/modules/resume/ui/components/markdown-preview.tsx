@@ -1,5 +1,6 @@
 import { useEffect, type RefObject } from "react";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 const cssReset = `
   html, body {
@@ -46,8 +47,10 @@ export function MarkdownPreview({ title, markdown, css, iframeRef }: Props) {
 			</html>
 		`;
 
+    const sanitizedHTML = DOMPurify.sanitize(fullHtml);
+
     doc.open();
-    doc.writeln(fullHtml);
+    doc.writeln(sanitizedHTML);
     doc.close();
   }, [markdown, css, title, iframeRef.current]);
 

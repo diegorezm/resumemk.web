@@ -9,10 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root";
+import { Route as SignUpRouteImport } from "./routes/sign-up";
+import { Route as SignInRouteImport } from "./routes/sign-in";
+import { Route as AuthedRouteImport } from "./routes/_authed";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as ResumeDraftRouteImport } from "./routes/resume.draft";
 import { Route as ResumeIdRouteImport } from "./routes/resume.$id";
+import { Route as AuthedDashboardRouteImport } from "./routes/_authed/dashboard";
 
+const SignUpRoute = SignUpRouteImport.update({
+  id: "/sign-up",
+  path: "/sign-up",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const SignInRoute = SignInRouteImport.update({
+  id: "/sign-in",
+  path: "/sign-in",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const AuthedRoute = AuthedRouteImport.update({
+  id: "/_authed",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const IndexRoute = IndexRouteImport.update({
   id: "/",
   path: "/",
@@ -28,39 +46,98 @@ const ResumeIdRoute = ResumeIdRouteImport.update({
   path: "/resume/$id",
   getParentRoute: () => rootRouteImport,
 } as any);
+const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
+  id: "/dashboard",
+  path: "/dashboard",
+  getParentRoute: () => AuthedRoute,
+} as any);
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
+  "/sign-in": typeof SignInRoute;
+  "/sign-up": typeof SignUpRoute;
+  "/dashboard": typeof AuthedDashboardRoute;
   "/resume/$id": typeof ResumeIdRoute;
   "/resume/draft": typeof ResumeDraftRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
+  "/sign-in": typeof SignInRoute;
+  "/sign-up": typeof SignUpRoute;
+  "/dashboard": typeof AuthedDashboardRoute;
   "/resume/$id": typeof ResumeIdRoute;
   "/resume/draft": typeof ResumeDraftRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
+  "/_authed": typeof AuthedRouteWithChildren;
+  "/sign-in": typeof SignInRoute;
+  "/sign-up": typeof SignUpRoute;
+  "/_authed/dashboard": typeof AuthedDashboardRoute;
   "/resume/$id": typeof ResumeIdRoute;
   "/resume/draft": typeof ResumeDraftRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/resume/$id" | "/resume/draft";
+  fullPaths:
+    | "/"
+    | "/sign-in"
+    | "/sign-up"
+    | "/dashboard"
+    | "/resume/$id"
+    | "/resume/draft";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/resume/$id" | "/resume/draft";
-  id: "__root__" | "/" | "/resume/$id" | "/resume/draft";
+  to:
+    | "/"
+    | "/sign-in"
+    | "/sign-up"
+    | "/dashboard"
+    | "/resume/$id"
+    | "/resume/draft";
+  id:
+    | "__root__"
+    | "/"
+    | "/_authed"
+    | "/sign-in"
+    | "/sign-up"
+    | "/_authed/dashboard"
+    | "/resume/$id"
+    | "/resume/draft";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
+  AuthedRoute: typeof AuthedRouteWithChildren;
+  SignInRoute: typeof SignInRoute;
+  SignUpRoute: typeof SignUpRoute;
   ResumeIdRoute: typeof ResumeIdRoute;
   ResumeDraftRoute: typeof ResumeDraftRoute;
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
+    "/sign-up": {
+      id: "/sign-up";
+      path: "/sign-up";
+      fullPath: "/sign-up";
+      preLoaderRoute: typeof SignUpRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/sign-in": {
+      id: "/sign-in";
+      path: "/sign-in";
+      fullPath: "/sign-in";
+      preLoaderRoute: typeof SignInRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_authed": {
+      id: "/_authed";
+      path: "";
+      fullPath: "";
+      preLoaderRoute: typeof AuthedRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     "/": {
       id: "/";
       path: "/";
@@ -82,11 +159,32 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ResumeIdRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    "/_authed/dashboard": {
+      id: "/_authed/dashboard";
+      path: "/dashboard";
+      fullPath: "/dashboard";
+      preLoaderRoute: typeof AuthedDashboardRouteImport;
+      parentRoute: typeof AuthedRoute;
+    };
   }
 }
 
+interface AuthedRouteChildren {
+  AuthedDashboardRoute: typeof AuthedDashboardRoute;
+}
+
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedDashboardRoute: AuthedDashboardRoute,
+};
+
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren);
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthedRoute: AuthedRouteWithChildren,
+  SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
   ResumeIdRoute: ResumeIdRoute,
   ResumeDraftRoute: ResumeDraftRoute,
 };

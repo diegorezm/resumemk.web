@@ -6,21 +6,25 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
-import ClerkProvider from "../integrations/clerk/provider.tsx";
-
-import ConvexProvider from "../integrations/convex/provider.tsx";
-
-import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
+import { DefaultCatchBoundary } from "@/components/default-catch-boundary.tsx";
 
 import appCss from "../styles.css?url";
 
 import type { QueryClient } from "@tanstack/react-query";
+import { Providers } from "@/components/providers.tsx";
 
 interface MyRouterContext {
   queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  errorComponent: (props) => {
+    return (
+      <RootDocument>
+        <DefaultCatchBoundary {...props} />
+      </RootDocument>
+    );
+  },
   head: () => ({
     meta: [
       {
@@ -44,13 +48,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
   component: () => (
     <RootDocument>
-      <ClerkProvider>
-        <ConvexProvider>
-          <Outlet />
-          <TanStackRouterDevtools />
-          <TanStackQueryLayout />
-        </ConvexProvider>
-      </ClerkProvider>
+      <Providers>
+        <Outlet />
+        <TanStackRouterDevtools />
+      </Providers>
     </RootDocument>
   ),
 });
