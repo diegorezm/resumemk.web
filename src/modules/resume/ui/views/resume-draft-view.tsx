@@ -3,6 +3,8 @@ import { ResumeTitleDropdown } from "@/modules/resume/ui/components/resume-title
 import { EditorLayout } from "@/modules/resume/ui/components/editor-layout";
 import { useResumeDraftStore } from "@/store/resume-draft";
 import { SignInButton } from "@clerk/tanstack-react-start";
+import { Button } from "@/components/ui/button";
+import { LogIn } from "lucide-react";
 
 export function ResumeDraftView() {
   const { css, markdown, setMarkdown, setCss } = useResumeDraftStore();
@@ -17,7 +19,12 @@ export function ResumeDraftView() {
           markdown={markdown}
           iframeRef={iframeRef}
         />
-        <SignInButton mode="modal" />
+        <SignInButton mode="modal">
+          <Button variant="outline" className="flex items-center gap-2">
+            <LogIn className="h-4 w-4" />
+            Sign in
+          </Button>
+        </SignInButton>
       </header>
 
       <EditorLayout
