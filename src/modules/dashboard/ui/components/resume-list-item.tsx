@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Button } from "@/components/ui/button";
+import { useDeleteResume } from "@/modules/resume/queries/use-delete-resume";
 
 type ResumeListItemProps = {
   resume: Doc<"resumes">;
@@ -27,11 +28,15 @@ export function ResumeListItem({ resume }: ResumeListItemProps) {
     });
   };
 
+  const { mutateAsync: deleteResume, isPending: deletePending } =
+    useDeleteResume();
+
   return (
     <li className="flex justify-between items-center border rounded-lg px-4 py-2 bg-accent/50">
       <div className="flex flex-col">
         <Link
           to="/resume/$id"
+          className="hover:underline"
           params={{
             id: resume._id,
           }}
@@ -58,7 +63,7 @@ export function ResumeListItem({ resume }: ResumeListItemProps) {
                 params={{
                   id: resume._id,
                 }}
-                className="flex flex-row items-center gap-2"
+                className="flex flex-row items-center gap-2 w-full"
               >
                 <Eye className="size-4" />
                 <span className="text-md">View</span>
@@ -69,7 +74,14 @@ export function ResumeListItem({ resume }: ResumeListItemProps) {
               <span className="text-md">Edit</span>
             </DropdownMenuItem>
 
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => {
+                deleteResume({
+                  id: resume._id,
+                });
+              }}
+              disabled={deletePending}
+            >
               <TrashIcon className="size-4" />
               <span className="text-md">Delete</span>
             </DropdownMenuItem>

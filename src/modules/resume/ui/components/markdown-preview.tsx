@@ -28,7 +28,10 @@ export function MarkdownPreview({ title, markdown, css, iframeRef }: Props) {
     const doc = iframe.contentDocument || iframe.contentWindow?.document;
     if (!doc) return;
 
-    const html = marked(markdown);
+    const html = marked(markdown, {
+      async: false,
+    });
+    const sanitizedHTML = DOMPurify.sanitize(html);
     const fullHtml = `
 			<!DOCTYPE html>
 			<html>
@@ -42,15 +45,13 @@ export function MarkdownPreview({ title, markdown, css, iframeRef }: Props) {
 				</style>
 			</head>
 			<body class="resume">
-				${html}
+				${sanitizedHTML}
 			</body>
 			</html>
 		`;
 
-    const sanitizedHTML = DOMPurify.sanitize(fullHtml);
-
     doc.open();
-    doc.writeln(sanitizedHTML);
+    doc.writeln(fullHtml);
     doc.close();
   }, [markdown, css, title, iframeRef.current]);
 

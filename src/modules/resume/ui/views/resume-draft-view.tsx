@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { ResumeTitleDropdown } from "@/modules/resume/ui/components/resume-title-dropdown";
 import { EditorLayout } from "@/modules/resume/ui/components/editor-layout";
 import { useResumeDraftStore } from "@/store/resume-draft";
+import { SignInButton } from "@clerk/tanstack-react-start";
 
 export function ResumeDraftView() {
   const { css, markdown, setMarkdown, setCss } = useResumeDraftStore();
@@ -16,6 +17,7 @@ export function ResumeDraftView() {
           markdown={markdown}
           iframeRef={iframeRef}
         />
+        <SignInButton mode="modal" />
       </header>
 
       <EditorLayout

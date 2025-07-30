@@ -1,3 +1,5 @@
+import type { Id } from "@/convex/_generated/dataModel";
+import { ResumeView } from "@/modules/resume/ui/views/resume-view";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/resume/$id")({
@@ -6,6 +8,5 @@ export const Route = createFileRoute("/resume/$id")({
 
 function RouteComponent() {
   const { id } = Route.useParams();
-
-  return <div>{id}!</div>;
+  return <ResumeView resumeId={id as Id<"resumes">} />;
 }
