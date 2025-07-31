@@ -1,5 +1,8 @@
 import { mutation, query } from "./_generated/server";
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
+
+const MAX_RESUMES = 2;
+const MAX_CHARACTERS = 100_000;
 
 export const createResume = mutation({
   args: {
@@ -9,9 +12,11 @@ export const createResume = mutation({
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
-
     if (!user) {
-      throw new Error("Unauthorized");
+      throw new ConvexError({
+        message: "Unauthorized",
+        severity: "high",
+      });
     }
 
     const existingCount = await ctx.db
@@ -21,8 +26,20 @@ export const createResume = mutation({
       )
       .collect();
 
-    if (existingCount.length >= 10) {
-      throw new Error("Resume limit reached (max 10).");
+    if (existingCount.length >= MAX_RESUMES) {
+      throw new ConvexError({
+        message: `Resume limit reached (max ${MAX_RESUMES}).`,
+        severity: "medium",
+      });
+    }
+
+    const totalCharacters =
+      args.title.length + args.markdown.length + args.css.length;
+    if (totalCharacters > MAX_CHARACTERS) {
+      throw new ConvexError({
+        message: `Resume content too long (limit is ${MAX_CHARACTERS} characters).`,
+        severity: "medium",
+      });
     }
 
     return await ctx.db.insert("resumes", {
@@ -41,13 +58,16 @@ export const getMyResumes = query({
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
-
     if (!user) {
-      throw new Error("Unauthorized");
+      throw new ConvexError({
+        message: "Unauthorized",
+        severity: "high",
+      });
     }
+
     const { orderBy, search } = args;
 
-    let q = search
+    const q = search
       ? ctx.db
           .query("resumes")
           .withSearchIndex("resume_search_idx", (q) =>
@@ -59,6 +79,7 @@ export const getMyResumes = query({
             q.eq("createdBy", user.tokenIdentifier),
           )
           .order(orderBy ?? "desc");
+
     return await q.collect();
   },
 });
@@ -67,14 +88,19 @@ export const getResume = query({
   args: { id: v.id("resumes") },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
-
     if (!user) {
-      throw new Error("Unauthorized");
+      throw new ConvexError({
+        message: "Unauthorized",
+        severity: "high",
+      });
     }
 
     const resume = await ctx.db.get(args.id);
     if (!resume || resume.createdBy !== user.tokenIdentifier) {
-      throw new Error("Not found");
+      throw new ConvexError({
+        message: "Resume not found",
+        severity: "low",
+      });
     }
 
     return resume;
@@ -90,11 +116,31 @@ export const updateResume = mutation({
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
-    if (!user) throw new Error("Unauthorized");
+    if (!user) {
+      throw new ConvexError({
+        message: "Unauthorized",
+        severity: "high",
+      });
+    }
 
     const resume = await ctx.db.get(args.id);
     if (!resume || resume.createdBy !== user.tokenIdentifier) {
-      throw new Error("Not found");
+      throw new ConvexError({
+        message: "Resume not found",
+        severity: "low",
+      });
+    }
+
+    const totalCharacters =
+      (args.title?.length ?? resume.title.length) +
+      (args.markdown?.length ?? resume.markdown.length) +
+      (args.css?.length ?? resume.css.length);
+
+    if (totalCharacters > MAX_CHARACTERS) {
+      throw new ConvexError({
+        message: `Resume content too long (limit is ${MAX_CHARACTERS} characters).`,
+        severity: "medium",
+      });
     }
 
     await ctx.db.patch(args.id, {
@@ -111,11 +157,19 @@ export const deleteResume = mutation({
   args: { id: v.id("resumes") },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
-    if (!user) throw new Error("Unauthorized");
+    if (!user) {
+      throw new ConvexError({
+        message: "Unauthorized",
+        severity: "high",
+      });
+    }
 
     const resume = await ctx.db.get(args.id);
     if (!resume || resume.createdBy !== user.tokenIdentifier) {
-      throw new Error("Not found");
+      throw new ConvexError({
+        message: "Resume not found",
+        severity: "low",
+      });
     }
 
     await ctx.db.delete(args.id);

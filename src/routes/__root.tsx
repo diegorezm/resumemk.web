@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import type { QueryClient } from "@tanstack/react-query";
 import { Providers } from "@/components/providers.tsx";
 import { DialogList } from "@/components/dialog-list";
+import { Toaster } from "@/components/ui/sonner";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -56,6 +57,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <RootDocument>
       <Providers>
         <Outlet />
+        <Toaster />
         <DialogList />
         <TanStackRouterDevtools />
       </Providers>
@@ -72,6 +74,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body className="relative">
         <div className="absolute inset-0 -z-10 w-full h-full bg-background bg-[radial-gradient(var(--muted),transparent_1px)] [background-size:16px_16px]" />
         {children}
+
         <Scripts />
       </body>
     </html>

@@ -8,7 +8,7 @@ export default defineSchema({
     css: v.string(),
     createdBy: v.string(),
   })
-    .index("created_by_idx", ["createdBy", "_creationTime"])
+    .index("created_by_idx", ["createdBy"])
     .searchIndex("resume_search_idx", {
       searchField: "title",
       filterFields: ["_creationTime", "createdBy"],

@@ -4,7 +4,14 @@ import { useAuth } from "@clerk/tanstack-react-start";
 import { ClerkProvider } from "@clerk/tanstack-react-start";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexQueryClient } from "@convex-dev/react-query";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { toast } from "sonner";
+import { ConvexError } from "convex/values";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 if (!PUBLISHABLE_KEY) {
@@ -26,6 +33,32 @@ const queryClient: QueryClient = new QueryClient({
       queryFn: convexQueryClient.queryFn(),
     },
   },
+  queryCache: new QueryCache({
+    onError: (e) => {
+      if (e instanceof ConvexError) {
+        toast(e.data.message, {
+          position: "bottom-right",
+        });
+      } else {
+        toast("Something went wrong.", {
+          position: "bottom-right",
+        });
+      }
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (e) => {
+      if (e instanceof ConvexError) {
+        toast(e.data.message, {
+          position: "bottom-right",
+        });
+      } else {
+        toast("Something went wrong.", {
+          position: "bottom-right",
+        });
+      }
+    },
+  }),
 });
 
 convexQueryClient.connect(queryClient);
