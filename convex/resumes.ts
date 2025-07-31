@@ -14,6 +14,17 @@ export const createResume = mutation({
       throw new Error("Unauthorized");
     }
 
+    const existingCount = await ctx.db
+      .query("resumes")
+      .withIndex("created_by_idx", (q) =>
+        q.eq("createdBy", user.tokenIdentifier),
+      )
+      .collect();
+
+    if (existingCount.length >= 10) {
+      throw new Error("Resume limit reached (max 10).");
+    }
+
     return await ctx.db.insert("resumes", {
       title: args.title,
       markdown: args.markdown,
