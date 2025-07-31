@@ -24,19 +24,31 @@ export const createResume = mutation({
 });
 
 export const getMyResumes = query({
-  handler: async (ctx) => {
+  args: {
+    orderBy: v.optional(v.union(v.literal("asc"), v.literal("desc"))),
+    search: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
 
     if (!user) {
       throw new Error("Unauthorized");
     }
+    const { orderBy, search } = args;
 
-    return await ctx.db
-      .query("resumes")
-      .withIndex("by_created_by", (q) =>
-        q.eq("createdBy", user.tokenIdentifier),
-      )
-      .collect();
+    let q = search
+      ? ctx.db
+          .query("resumes")
+          .withSearchIndex("resume_search_idx", (q) =>
+            q.search("title", search).eq("createdBy", user.tokenIdentifier),
+          )
+      : ctx.db
+          .query("resumes")
+          .withIndex("created_by_idx", (q) =>
+            q.eq("createdBy", user.tokenIdentifier),
+          )
+          .order(orderBy ?? "desc");
+    return await q.collect();
   },
 });
 

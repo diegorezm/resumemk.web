@@ -2,7 +2,7 @@ import type { Id } from "@/convex/_generated/dataModel";
 import { ResumeView } from "@/modules/resume/ui/views/resume-view";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/resume/$id")({
+export const Route = createFileRoute("/_authed/resume/$id")({
   component: RouteComponent,
 });
 

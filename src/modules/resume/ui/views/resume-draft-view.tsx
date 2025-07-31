@@ -18,6 +18,7 @@ export function ResumeDraftView() {
           title={resumeTitle}
           markdown={markdown}
           iframeRef={iframeRef}
+          isDraft
         />
         <SignInButton mode="modal">
           <Button variant="outline" className="flex items-center gap-2">

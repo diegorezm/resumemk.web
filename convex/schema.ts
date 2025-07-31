@@ -7,5 +7,10 @@ export default defineSchema({
     markdown: v.string(),
     css: v.string(),
     createdBy: v.string(),
-  }).index("by_created_by", ["createdBy"]),
+  })
+    .index("created_by_idx", ["createdBy", "_creationTime"])
+    .searchIndex("resume_search_idx", {
+      searchField: "title",
+      filterFields: ["_creationTime", "createdBy"],
+    }),
 });

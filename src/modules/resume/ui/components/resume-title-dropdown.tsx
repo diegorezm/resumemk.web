@@ -13,17 +13,36 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "@tanstack/react-router";
-import { ChevronDownIcon, ChevronLeft, Download } from "lucide-react";
+import {
+  ChevronDownIcon,
+  ChevronLeft,
+  Download,
+  Edit,
+  TrashIcon,
+} from "lucide-react";
 
 import type { RefObject } from "react";
+import { useOpenEditResumeDialog } from "../../hooks/use-open-edit-resume-dialog";
+import { useOpenDeleteResumeDialog } from "../../hooks/use-open-delete-resume-dialog";
 
 interface Props {
   title: string;
   markdown: string;
   iframeRef: RefObject<HTMLIFrameElement | null>;
+  resumeId?: string;
+  isDraft?: boolean;
 }
 
-export function ResumeTitleDropdown({ title, markdown, iframeRef }: Props) {
+export function ResumeTitleDropdown({
+  title,
+  markdown,
+  iframeRef,
+  isDraft = false,
+  resumeId,
+}: Props) {
+  const { onOpen: onOpenEditDialog } = useOpenEditResumeDialog();
+  const { onOpen: onOpenDeleteDialog } = useOpenDeleteResumeDialog();
+
   function downloadHTML() {
     const iframe = iframeRef.current;
     if (!iframe) return;
@@ -81,7 +100,7 @@ export function ResumeTitleDropdown({ title, markdown, iframeRef }: Props) {
   }
   return (
     <div className="flex gap-4 items-center justify-center">
-      <Link to="/">
+      <Link to="/dashboard">
         <Button variant="outline" size="sm">
           <ChevronLeft className="size-4" />
         </Button>
@@ -97,6 +116,25 @@ export function ResumeTitleDropdown({ title, markdown, iframeRef }: Props) {
         <DropdownMenuContent>
           <DropdownMenuLabel>Options</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          {!isDraft && (
+            <>
+              <DropdownMenuItem
+                onClick={() => onOpenEditDialog(resumeId ?? "")}
+              >
+                <Edit className="size-4" />
+                <span className="text-md">Edit</span>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                onClick={() => {
+                  onOpenDeleteDialog(resumeId ?? "");
+                }}
+              >
+                <TrashIcon className="size-4" />
+                <span className="text-md">Delete</span>
+              </DropdownMenuItem>
+            </>
+          )}
           <DropdownMenuGroup>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>

@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Button } from "@/components/ui/button";
-import { useDeleteResume } from "@/modules/resume/queries/use-delete-resume";
+import { useOpenDeleteResumeDialog } from "@/modules/resume/hooks/use-open-delete-resume-dialog";
+import { useOpenEditResumeDialog } from "@/modules/resume/hooks/use-open-edit-resume-dialog";
 
 type ResumeListItemProps = {
   resume: Doc<"resumes">;
@@ -28,8 +29,8 @@ export function ResumeListItem({ resume }: ResumeListItemProps) {
     });
   };
 
-  const { mutateAsync: deleteResume, isPending: deletePending } =
-    useDeleteResume();
+  const { onOpen: onOpenDeleteResumeDialog } = useOpenDeleteResumeDialog();
+  const { onOpen: onOpenEditResumeDialog } = useOpenEditResumeDialog();
 
   return (
     <li className="flex justify-between items-center border rounded-lg px-4 py-2 bg-accent/50">
@@ -69,18 +70,19 @@ export function ResumeListItem({ resume }: ResumeListItemProps) {
                 <span className="text-md">View</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                onOpenEditResumeDialog(resume._id);
+              }}
+            >
               <Edit className="size-4" />
               <span className="text-md">Edit</span>
             </DropdownMenuItem>
 
             <DropdownMenuItem
-              onClick={async () => {
-                deleteResume({
-                  id: resume._id,
-                });
+              onClick={() => {
+                onOpenDeleteResumeDialog(resume._id);
               }}
-              disabled={deletePending}
             >
               <TrashIcon className="size-4" />
               <span className="text-md">Delete</span>

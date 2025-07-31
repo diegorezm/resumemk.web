@@ -14,8 +14,8 @@ import { Route as SignInRouteImport } from "./routes/sign-in";
 import { Route as AuthedRouteImport } from "./routes/_authed";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as ResumeDraftRouteImport } from "./routes/resume.draft";
-import { Route as ResumeIdRouteImport } from "./routes/resume.$id";
 import { Route as AuthedDashboardRouteImport } from "./routes/_authed/dashboard";
+import { Route as AuthedResumeIdRouteImport } from "./routes/_authed/resume.$id";
 
 const SignUpRoute = SignUpRouteImport.update({
   id: "/sign-up",
@@ -41,14 +41,14 @@ const ResumeDraftRoute = ResumeDraftRouteImport.update({
   path: "/resume/draft",
   getParentRoute: () => rootRouteImport,
 } as any);
-const ResumeIdRoute = ResumeIdRouteImport.update({
-  id: "/resume/$id",
-  path: "/resume/$id",
-  getParentRoute: () => rootRouteImport,
-} as any);
 const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
+  getParentRoute: () => AuthedRoute,
+} as any);
+const AuthedResumeIdRoute = AuthedResumeIdRouteImport.update({
+  id: "/resume/$id",
+  path: "/resume/$id",
   getParentRoute: () => AuthedRoute,
 } as any);
 
@@ -57,16 +57,16 @@ export interface FileRoutesByFullPath {
   "/sign-in": typeof SignInRoute;
   "/sign-up": typeof SignUpRoute;
   "/dashboard": typeof AuthedDashboardRoute;
-  "/resume/$id": typeof ResumeIdRoute;
   "/resume/draft": typeof ResumeDraftRoute;
+  "/resume/$id": typeof AuthedResumeIdRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/sign-in": typeof SignInRoute;
   "/sign-up": typeof SignUpRoute;
   "/dashboard": typeof AuthedDashboardRoute;
-  "/resume/$id": typeof ResumeIdRoute;
   "/resume/draft": typeof ResumeDraftRoute;
+  "/resume/$id": typeof AuthedResumeIdRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -75,8 +75,8 @@ export interface FileRoutesById {
   "/sign-in": typeof SignInRoute;
   "/sign-up": typeof SignUpRoute;
   "/_authed/dashboard": typeof AuthedDashboardRoute;
-  "/resume/$id": typeof ResumeIdRoute;
   "/resume/draft": typeof ResumeDraftRoute;
+  "/_authed/resume/$id": typeof AuthedResumeIdRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
@@ -85,16 +85,16 @@ export interface FileRouteTypes {
     | "/sign-in"
     | "/sign-up"
     | "/dashboard"
-    | "/resume/$id"
-    | "/resume/draft";
+    | "/resume/draft"
+    | "/resume/$id";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/"
     | "/sign-in"
     | "/sign-up"
     | "/dashboard"
-    | "/resume/$id"
-    | "/resume/draft";
+    | "/resume/draft"
+    | "/resume/$id";
   id:
     | "__root__"
     | "/"
@@ -102,8 +102,8 @@ export interface FileRouteTypes {
     | "/sign-in"
     | "/sign-up"
     | "/_authed/dashboard"
-    | "/resume/$id"
-    | "/resume/draft";
+    | "/resume/draft"
+    | "/_authed/resume/$id";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -111,7 +111,6 @@ export interface RootRouteChildren {
   AuthedRoute: typeof AuthedRouteWithChildren;
   SignInRoute: typeof SignInRoute;
   SignUpRoute: typeof SignUpRoute;
-  ResumeIdRoute: typeof ResumeIdRoute;
   ResumeDraftRoute: typeof ResumeDraftRoute;
 }
 
@@ -152,13 +151,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ResumeDraftRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    "/resume/$id": {
-      id: "/resume/$id";
-      path: "/resume/$id";
-      fullPath: "/resume/$id";
-      preLoaderRoute: typeof ResumeIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
     "/_authed/dashboard": {
       id: "/_authed/dashboard";
       path: "/dashboard";
@@ -166,15 +158,24 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthedDashboardRouteImport;
       parentRoute: typeof AuthedRoute;
     };
+    "/_authed/resume/$id": {
+      id: "/_authed/resume/$id";
+      path: "/resume/$id";
+      fullPath: "/resume/$id";
+      preLoaderRoute: typeof AuthedResumeIdRouteImport;
+      parentRoute: typeof AuthedRoute;
+    };
   }
 }
 
 interface AuthedRouteChildren {
   AuthedDashboardRoute: typeof AuthedDashboardRoute;
+  AuthedResumeIdRoute: typeof AuthedResumeIdRoute;
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedDashboardRoute: AuthedDashboardRoute,
+  AuthedResumeIdRoute: AuthedResumeIdRoute,
 };
 
 const AuthedRouteWithChildren =
@@ -185,7 +186,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthedRoute: AuthedRouteWithChildren,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
-  ResumeIdRoute: ResumeIdRoute,
   ResumeDraftRoute: ResumeDraftRoute,
 };
 export const routeTree = rootRouteImport

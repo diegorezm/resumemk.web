@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 
 import type { QueryClient } from "@tanstack/react-query";
 import { Providers } from "@/components/providers.tsx";
+import { DialogList } from "@/components/dialog-list";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -43,6 +44,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         rel: "stylesheet",
         href: appCss,
       },
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/favicon.ico",
+      },
     ],
   }),
 
@@ -50,6 +56,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <RootDocument>
       <Providers>
         <Outlet />
+        <DialogList />
         <TanStackRouterDevtools />
       </Providers>
     </RootDocument>

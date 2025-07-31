@@ -36,6 +36,7 @@ export function ResumeView({ resumeId }: Props) {
           title={data.title}
           markdown={data.markdown}
           iframeRef={iframeRef}
+          resumeId={data._id}
         />
         <UserControl showName />
       </header>
