@@ -90,7 +90,7 @@ export function ResumeTitleDropdown({ title, markdown, iframeRef }: Props) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant={"default"} size="sm">
-            Resume
+            {title}
             <ChevronDownIcon className="size-4" />
           </Button>
         </DropdownMenuTrigger>
