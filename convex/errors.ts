@@ -1,5 +1,5 @@
 import { ConvexError } from "convex/values";
-
+
 export type ErrorSeverity = "low" | "medium" | "high";
 
 export type ErrorCode =
