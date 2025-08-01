@@ -108,17 +108,10 @@ export const updateResume = mutation({
     css: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const user = await ctx.auth.getUserIdentity();
-    if (!user) {
-      throw createError({
-        code: "Unauthorized",
-        message: "You must be signed in to update a resume.",
-        severity: "high",
-      });
-    }
+    const user = await getCurrentUserOrThrow(ctx);
 
     const resume = await ctx.db.get(args.id);
-    if (!resume || resume.createdBy !== user.tokenIdentifier) {
+    if (!resume || resume.createdBy !== user._id) {
       throw createError({
         code: "NotFound",
         message: "Resume not found or you don't have permission to edit it.",
