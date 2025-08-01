@@ -49,6 +49,10 @@ export function EditResumeDialog() {
     onClose();
   }
 
+  if (resumeId === null) {
+    return null;
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">

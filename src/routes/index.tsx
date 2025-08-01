@@ -12,7 +12,7 @@ function App() {
 
   return (
     <main className="text-center max-w-5xl mx-auto px-4">
-      <section className="h-screen w-full space-y-6 flex flex-col justify-center items-center">
+      <section className="h-screen w-full space-y-4 flex flex-col justify-center items-center">
         <h1 className="text-5xl font-semibold">Welcome to Resume Maker!</h1>
         <p className="text-lg">
           Create your resume with only{" "}
@@ -20,16 +20,21 @@ function App() {
           <span className="font-semibold">CSS</span>
         </p>
         <div className="space-x-4">
-          {/* TODO: Send user to /dashboard if he is authenticated */}
           <Link to={auth.isSignedIn ? "/dashboard" : "/resume/draft"}>
             <Button size="lg">Get started!</Button>
           </Link>
-          <a href="/">
+          <a href="/#about">
             <Button variant="outline" size="lg">
               Knowm more!
             </Button>
           </a>
         </div>
+      </section>
+
+      <section id="about" className="h-screen w-full">
+        <h1 className="text-2xl font-semibold text-start">
+          What can resumemk do?
+        </h1>
       </section>
     </main>
   );

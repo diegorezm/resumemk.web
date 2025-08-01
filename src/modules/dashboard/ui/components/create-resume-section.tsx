@@ -47,7 +47,6 @@ function TemplateListItem({ template, children }: TemplateListItemProps) {
       },
       {
         onSuccess: (id) => {
-          console.log(id);
           navigate({
             to: "/resume/$id",
             params: {
