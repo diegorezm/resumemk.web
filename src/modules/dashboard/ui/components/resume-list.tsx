@@ -1,13 +1,5 @@
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-
 import { ResumeListItem } from "./resume-list-item";
 import { Input } from "@/components/ui/input";
-import { useFilterResume } from "../../hooks/use-filter-resumes";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@/convex/_generated/api";
