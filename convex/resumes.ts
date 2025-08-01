@@ -1,7 +1,8 @@
 import { mutation, query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
+import { getUserOrThrow } from "./helpers";
 
-const MAX_RESUMES = 2;
+const MAX_RESUMES = 5;
 const MAX_CHARACTERS = 100_000;
 
 export const createResume = mutation({
@@ -11,13 +12,7 @@ export const createResume = mutation({
     css: v.string(),
   },
   handler: async (ctx, args) => {
-    const user = await ctx.auth.getUserIdentity();
-    if (!user) {
-      throw new ConvexError({
-        message: "Unauthorized",
-        severity: "high",
-      });
-    }
+    const user = await getUserOrThrow(ctx);
 
     const existingCount = await ctx.db
       .query("resumes")
@@ -57,14 +52,7 @@ export const getMyResumes = query({
     search: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const user = await ctx.auth.getUserIdentity();
-    if (!user) {
-      throw new ConvexError({
-        message: "Unauthorized",
-        severity: "high",
-      });
-    }
-
+    const user = await getUserOrThrow(ctx);
     const { orderBy, search } = args;
 
     const q = search
@@ -87,13 +75,7 @@ export const getMyResumes = query({
 export const getResume = query({
   args: { id: v.id("resumes") },
   handler: async (ctx, args) => {
-    const user = await ctx.auth.getUserIdentity();
-    if (!user) {
-      throw new ConvexError({
-        message: "Unauthorized",
-        severity: "high",
-      });
-    }
+    const user = await getUserOrThrow(ctx);
 
     const resume = await ctx.db.get(args.id);
     if (!resume || resume.createdBy !== user.tokenIdentifier) {
@@ -156,13 +138,7 @@ export const updateResume = mutation({
 export const deleteResume = mutation({
   args: { id: v.id("resumes") },
   handler: async (ctx, args) => {
-    const user = await ctx.auth.getUserIdentity();
-    if (!user) {
-      throw new ConvexError({
-        message: "Unauthorized",
-        severity: "high",
-      });
-    }
+    const user = await getUserOrThrow(ctx);
 
     const resume = await ctx.db.get(args.id);
     if (!resume || resume.createdBy !== user.tokenIdentifier) {
