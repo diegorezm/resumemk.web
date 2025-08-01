@@ -23,9 +23,9 @@ export function EditResumeDialog() {
     useUpdateResume();
 
   const { isLoading: isLoadingData, data } = useQuery({
-    enabled: !!resumeId,
+    enabled: resumeId !== null,
     ...convexQuery(api.resumes.getResume, {
-      id: resumeId! as Id<"resumes">,
+      id: resumeId ? (resumeId as Id<"resumes">) : undefined,
     }),
   });
 
