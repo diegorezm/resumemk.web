@@ -1,4 +1,5 @@
 import { Editor } from "@monaco-editor/react";
+import { useCodeEditorConfig } from "../../hooks/use-code-editor-config";
 
 interface Props {
   value: string;
@@ -15,6 +16,7 @@ export function CodeEditor({
   height = "100vh",
   language,
 }: Props) {
+  const { options } = useCodeEditorConfig();
   return (
     <Editor
       value={value}
@@ -30,36 +32,7 @@ export function CodeEditor({
             editor.setTheme("solarized-light");
           });
       }}
-      options={{
-        minimap: {
-          enabled: false,
-        },
-        lineNumbers: "off",
-        glyphMargin: false,
-        folding: false,
-        lineDecorationsWidth: 10,
-        lineNumbersMinChars: 2,
-        scrollBeyondLastLine: false,
-        renderLineHighlight: "none",
-        overviewRulerLanes: 0,
-        scrollbar: {
-          vertical: "auto",
-          horizontal: "auto",
-          handleMouseWheel: true,
-        },
-        guides: {
-          indentation: true,
-        },
-        contextmenu: false,
-        smoothScrolling: true,
-        wordWrap: "on",
-        fontSize: 16,
-        fontLigatures: true,
-        padding: {
-          top: 10,
-          bottom: 10,
-        },
-      }}
+      options={options}
     />
   );
 }

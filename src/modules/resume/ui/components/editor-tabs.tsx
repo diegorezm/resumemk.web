@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { CodeEditor } from "./code-editor";
 import { cn } from "@/lib/utils";
-import { Expand, Minimize } from "lucide-react";
+import { Bolt, Expand, Minimize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MarkdownPreview } from "./markdown-preview";
+import { useOpenEditEditorConfigDialog } from "../../hooks/use-open-editor-config";
 
 interface Props {
   markdown: string;
@@ -27,6 +28,7 @@ export function EditorTabs({
   title = "Preview",
   iframeRef,
 }: Props) {
+  const { onOpen: onOpenEditEditor } = useOpenEditEditorConfigDialog();
   const [activeTab, setActiveTab] = useState<"markdown" | "css" | "preview">(
     "markdown",
   );
@@ -55,19 +57,30 @@ export function EditorTabs({
             </button>
           ))}
         </div>
-        <Button
-          type="button"
-          onClick={() => {
-            setEditorFullScreen(!isEditorFullScreen);
-            if (activeTab === "preview") {
-              setActiveTab("markdown");
-            }
-          }}
-          variant={"ghost"}
-          size="icon"
-        >
-          {isEditorFullScreen ? <Minimize /> : <Expand />}
-        </Button>
+
+        <div className="space-x-2">
+          <Button
+            type="button"
+            onClick={onOpenEditEditor}
+            variant={"ghost"}
+            size="sm"
+          >
+            <Bolt />
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              setEditorFullScreen(!isEditorFullScreen);
+              if (activeTab === "preview") {
+                setActiveTab("markdown");
+              }
+            }}
+            variant={"ghost"}
+            size="sm"
+          >
+            {isEditorFullScreen ? <Minimize /> : <Expand />}
+          </Button>
+        </div>
       </header>
       {activeTab === "preview" ? (
         <MarkdownPreview
