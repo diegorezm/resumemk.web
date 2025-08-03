@@ -363,4 +363,117 @@ body {
 }
     `,
   },
+  {
+    title: "Fancy",
+    image: "fancy_preview.png",
+    markdown: `
+# John Doe
+
+📍 Your Location  | ✉️ [youremail@yourdomain.com](mailto:youremail@yourdomain.com)  | 📞 0541 999 99 99 | 🔗 [yourwebsite.com](https://yourwebsite.com) | 🔗 [linkedin.com/in/yourusername](https://linkedin.com/in/yourusername)  | 🔗 [github.com/yourusername](https://github.com/yourusername)
+
+
+---
+
+## Education
+
+### University of Pennsylvania  **BS in Computer Science**
+*Sept 2000  May 2005*
+- GPA: 3.9/4.0 ([link](https://example.com))
+- **Coursework:** Computer Architecture, Learning Algorithms, Computational Theory
+
+
+## Experience
+
+### Apple  **Software Engineer**
+*Cupertino, CA | June 2005  Aug 2007*
+- Reduced rendering time by 75% via prediction algorithm
+- Integrated iChat with Spotlight Search
+- Redesigned chat file format for backward compatibility
+
+### Microsoft  **Software Engineer Intern**
+*Redmond, WA | June 2003  Aug 2003*
+- Designed UI for VS file switcher
+- Optimized gradient service with caching
+- Built test generator from XML schemas
+
+
+## Projects
+
+### Multi-User Drawing Tool
+[github.com/name/repo](https://github.com/name/repo)
+- Synchronized real-time drawing board
+- **Tools:** C++, MFC
+
+### Custom Operating System
+*2002*
+- Built UNIX-style OS: scheduler, FS, editor
+- **Tools:** C
+
+## Publications
+
+**3D Finite Element Analysis of No-Insulation Coils**
+Frodo Baggins, *John Doe*, Samwise Gamgee
+[10.1109/TASC.2023.3340648](https://doi.org/10.1109/TASC.2023.3340648)  *Jan 2004*
+
+
+## Technologies
+
+**Languages:** C++, C, Java, Objective-C, C#, SQL, JavaScript
+**Tech Stack:** .NET, SQL Server, Xcode, Interface Builder
+    `,
+    css: `
+html,
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: aliceblue;
+  color: #1a1a1a;
+  line-height: 1.4;
+  max-width: 900px;
+margin: 0 auto;
+
+}
+
+h1 {
+  font-size: 2rem;
+  color: rgb(0, 79, 144);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: rgb(0, 79, 144);
+  border-bottom: 1px solid #ccc;
+  margin-top: 2rem;
+  padding-bottom: 0.2rem;
+}
+
+h3 {
+  font-size: 1rem;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+a {
+  color: rgb(0, 79, 144);
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 1.1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+li {
+  margin-bottom: 0.1rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+    `,
+  },
 ];

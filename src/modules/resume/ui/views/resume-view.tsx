@@ -38,7 +38,7 @@ export function ResumeView({ resumeId }: Props) {
           iframeRef={iframeRef}
           resumeId={data._id}
         />
-        <UserControl showName />
+        <UserControl />
       </header>
 
       <EditorLayout

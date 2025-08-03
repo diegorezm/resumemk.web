@@ -2,9 +2,10 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Outlet } from "@tanstack/react-router";
 import { SignIn } from "@clerk/tanstack-react-start";
 import { fetchClerkAuth } from "@/lib/auth";
+import { DialogList } from "@/components/dialog-list";
 
 export const Route = createFileRoute("/_authed")({
-  component: () => <Outlet />,
+  component: RouteComponent,
   loader: async () => {
     const { userId } = await fetchClerkAuth();
     if (!userId) {
@@ -25,3 +26,12 @@ export const Route = createFileRoute("/_authed")({
     throw error;
   },
 });
+
+function RouteComponent() {
+  return (
+    <>
+      <Outlet />
+      <DialogList />
+    </>
+  );
+}
