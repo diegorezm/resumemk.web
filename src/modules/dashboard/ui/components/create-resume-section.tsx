@@ -286,4 +286,79 @@ strong {
 }
     `,
   },
+  {
+    title: "Simple resume",
+    image: "/simple_resume_showcase.png",
+    markdown: `
+<center>
+
+# John A. Doe
+
+123 Main Street, Cambridge, MA 02138
+
+(123) 456-7890  [john.doe@email.com](mailto:john.doe@email.com)  [linkedin.com/in/johndoe](linkedin.com/in/johndoe)  [github.com/johndoe](github.com/johndoe)
+
+</center>
+
+---
+
+## Education
+
+**Harvard University**, Cambridge, MA
+_Bachelor of Science in Computer Science_  May 2024
+- GPA: 3.8/4.0
+- Relevant Coursework: Algorithms, Machine Learning, Systems Programming, Data Structures
+
+---
+
+## Experience
+
+**Google**, Mountain View, CA
+_Software Engineering Intern_  Summer 2023
+- Designed and implemented a dashboard to visualize system health metrics, improving team monitoring by 35%
+- Contributed to backend services using Go and Protocol Buffers
+
+**Harvard Student Agencies**, Cambridge, MA
+_Frontend Developer_  Sep 2021  May 2023
+- Developed internal tools for student-run businesses using React and Tailwind CSS
+- Improved site performance by 22% by refactoring legacy code
+
+---
+
+## Projects
+
+**PathFinder**  Visual algorithm simulator
+- Created an interactive pathfinding visualizer using Dijkstra and A*
+- Over 10,000 users in the first month on GitHub Pages
+
+---
+
+## Leadership & Activities
+
+**Harvard Computer Society**  Events Chair
+- Organized weekly workshops on web development and interview prep
+- Coordinated HackHarvard 2022 with 300+ attendees
+
+**Teaching Fellow, CS50: Introduction to Computer Science**
+- Led weekly sections of 15+ students, hosted office hours, and graded assignments
+
+---
+
+## Skills
+
+- **Languages**: JavaScript, TypeScript, Python, Go, SQL
+- **Frameworks/Tools**: React, Next.js, Node.js, Tailwind, Git, Docker
+- **Languages**: English (fluent), Spanish (conversational)  
+    `,
+    css: `
+html,
+body {
+  margin: 0 auto;
+  padding: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  max-width: 900px;
+}
+    `,
+  },
 ];
