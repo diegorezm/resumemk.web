@@ -358,6 +358,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   max-width: 900px;
+  background-color: white;
+  color: black;
 }
     `,
   },
