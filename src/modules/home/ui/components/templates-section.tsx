@@ -34,7 +34,7 @@ export function TemplatesSection() {
               <img
                 src={t.image}
                 alt={t.title}
-                className="w-[420px] h-[450px]"
+                className="w-full h-[450px] rounded-md"
               />
               <p className="font-medium text-lg">{t.title}</p>
             </div>
