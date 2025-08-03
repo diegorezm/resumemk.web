@@ -4,7 +4,6 @@ import {
   Scripts,
   createRootRouteWithContext,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import { DefaultCatchBoundary } from "@/components/default-catch-boundary.tsx";
 
@@ -38,11 +37,67 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       {
         title: "Resumemk",
       },
+      {
+        name: "description",
+        content:
+          "Create your resume for free with Resumemk using Markdown. Build professional resumes quickly and effortlessly.",
+      },
+      {
+        name: "author",
+        content: "Diego Rezende",
+      },
+      {
+        name: "keywords",
+        content:
+          "resume builder, Markdown resume, free resume maker, professional resume generator, Resumemk, create resume online",
+      },
+      {
+        property: "og:title",
+        content: "Resumemk - Your resume with markdown!",
+      },
+      {
+        property: "og:description",
+        content:
+          "Create your resume for free with Resumemk using Markdown. Build professional resumes quickly and effortlessly.",
+      },
+      {
+        property: "og:url",
+        content: "https://resumemk.xyz",
+      },
+      {
+        property: "og:image",
+        content: "https://resumemk.xyz/og.png",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Resumemk - Your resume with markdown!",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Create your resume for free with Resumemk using Markdown. Build professional resumes quickly and effortlessly.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://resumemk.xyz/og.png",
+      },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "author",
+        href: "https://diegorezm.xyz/",
       },
       {
         rel: "icon",
