@@ -8,7 +8,7 @@ export function CreateResumeSection() {
     <section className="bg-muted">
       <div className="text-muted-foreground px-4 py-2 space-y-4 max-w-5xl mx-auto">
         <h1 className="text-lg font-medium">New resume</h1>
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 overflow-x-auto">
           <TemplateListItem
             template={{
               markdown: "",
@@ -59,7 +59,7 @@ function TemplateListItem({ template, children }: TemplateListItemProps) {
   }
 
   return (
-    <li className="hover:bg-accent/50 hover:cursor-pointer">
+    <li className="hover:bg-accent/50 hover:cursor-pointer min-w-[220px]">
       <button
         type={"button"}
         className="border-2 border-border rounded hover:border-primary disabled:opacity-60"
