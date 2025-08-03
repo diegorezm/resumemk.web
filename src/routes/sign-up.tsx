@@ -8,7 +8,7 @@ export const Route = createFileRoute("/sign-up")({
 
 function RouteComponent() {
   return (
-    <>
+    <div className="px-4">
       <Navbar />
       <main className="min-h-screen flex items-center justify-center px-4  max-w-5xl mx-auto">
         <SignUp
@@ -17,6 +17,6 @@ function RouteComponent() {
           forceRedirectUrl={"/"}
         />
       </main>
-    </>
+    </div>
   );
 }

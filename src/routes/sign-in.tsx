@@ -8,15 +8,15 @@ export const Route = createFileRoute("/sign-in")({
 
 function RouteComponent() {
   return (
-    <>
+    <div className="px-4">
       <Navbar />
-      <main className="min-h-screen flex items-center justify-center px-4  max-w-5xl mx-auto">
+      <main className="min-h-screen flex items-center justify-center  max-w-5xl mx-auto">
         <SignIn
           signUpUrl={"/sign-up"}
           routing={"hash"}
           forceRedirectUrl={"/"}
         />
       </main>
-    </>
+    </div>
   );
 }
