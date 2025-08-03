@@ -14,7 +14,7 @@ export function Navbar() {
         </Link>
         <div className="flex items-center">
           {auth.isSignedIn ? (
-            <UserControl />
+            <UserControl showName />
           ) : (
             <div className="space-x-2">
               <Link to="/sign-in">
