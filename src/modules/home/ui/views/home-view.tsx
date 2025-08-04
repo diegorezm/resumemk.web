@@ -24,7 +24,7 @@ export function HomeView() {
         <div className="space-x-4">
           <Link to={auth.isSignedIn ? "/dashboard" : "/resume/draft"}>
             <Button size="lg">
-              {auth.isSignedIn ? "Go yo your dashboard!" : "Get started!"}
+              {auth.isSignedIn ? "Dashboard" : "Get started!"}
             </Button>
           </Link>
           <a href="#about">
