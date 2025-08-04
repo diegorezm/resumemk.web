@@ -25,13 +25,7 @@ export function FeaturesSection() {
           >
             <div className="md:w-1/2 w-full">
               <img
-                src={
-                  i === 0
-                    ? "/live_markdown_editor.png"
-                    : i === 1
-                      ? "/css_editor.png"
-                      : "/export_showcase.png"
-                }
+                src={getImageSrc(i)}
                 alt={feature.alt}
                 className="w-full h-full object-cover"
               />
@@ -45,4 +39,17 @@ export function FeaturesSection() {
       </div>
     </section>
   );
+}
+
+function getImageSrc(index: number): string {
+  switch (index) {
+    case 0:
+      return "/live_markdown_editor.png";
+    case 1:
+      return "/css_editor.png";
+    case 2:
+      return "/export_showcase.png";
+    default:
+      return "/dashboard_preview.png";
+  }
 }

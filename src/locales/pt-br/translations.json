@@ -24,6 +24,11 @@
           "title": "Exportar para PDF",
           "description": "Exporte seu currículo instantaneamente como um PDF limpo e pronto para impressão.",
           "alt": "Opções de exportação"
+        },
+        {
+          "title": "Uma Dashboard",
+          "description": "Mantenha todas as versões do seu currículo em um só lugar!",
+          "alt": "Visualização do painel"
         }
       ]
     },

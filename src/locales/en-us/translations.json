@@ -25,6 +25,11 @@
           "title": "Export to PDF",
           "description": "Instantly export your resume as a clean, print-ready PDF.",
           "alt": "Export options"
+        },
+        {
+          "title": "A Dashboard",
+          "description": "Keep every version of your resume in one place!",
+          "alt": "Dashboard preview"
         }
       ]
     },
