@@ -15,7 +15,7 @@ export function HomeView() {
     <main className="max-w-7xl mx-auto px-4">
       <Navbar />
       <section
-        className="h-[520px] md:h-[600px] lg:h-[880px] w-full flex flex-col mt-52 md:mt-64 lg:justify-center lg:mt-0 items-center text-center space-y-4"
+        className="w-full h-screen flex flex-col justify-center  items-center text-center space-y-4"
         id="hero"
       >
         <h1 className="text-5xl font-bold">{t("home.hero.heading")}</h1>
