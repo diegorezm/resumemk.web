@@ -74,11 +74,7 @@ export function getContext() {
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <I18nextProvider i18n={i18n}>
-      <ClerkProvider
-        publishableKey={PUBLISHABLE_KEY}
-        signInFallbackRedirectUrl={"/"}
-        signUpFallbackRedirectUrl={"/"}
-      >
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
         <ConvexProviderWithClerk
           client={convexQueryClient.convexClient}
           useAuth={useAuth}

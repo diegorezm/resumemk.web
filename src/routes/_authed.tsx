@@ -3,7 +3,7 @@ import { Outlet } from "@tanstack/react-router";
 import { SignIn } from "@clerk/tanstack-react-start";
 import { fetchClerkAuth } from "@/lib/auth";
 import { DialogList } from "@/components/dialog-list";
-
+import { UploadDraftOnSignup } from "@/components/upload-draft";
 export const Route = createFileRoute("/_authed")({
   component: RouteComponent,
   loader: async () => {
@@ -32,6 +32,7 @@ function RouteComponent() {
     <>
       <Outlet />
       <DialogList />
+      <UploadDraftOnSignup />
     </>
   );
 }
