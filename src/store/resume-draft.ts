@@ -1,3 +1,4 @@
+import { resumeTemplates } from "@/lib/resume-templates";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -11,8 +12,8 @@ interface ResumeDraftStoreState {
 export const useResumeDraftStore = create<ResumeDraftStoreState>()(
   persist(
     (set) => ({
-      css: "",
-      markdown: "",
+      css: resumeTemplates[0].css,
+      markdown: resumeTemplates[0].markdown,
       setMarkdown: (m) => set({ markdown: m }),
       setCss: (c) => set({ css: c }),
     }),
