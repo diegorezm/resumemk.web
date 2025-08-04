@@ -45,5 +45,10 @@
   "navbar": {
     "signIn": "Entrar",
     "signUp": "Criar conta"
+  },
+
+  "draft": {
+    "alertTitle": "Quer salvar seu currículo?",
+    "alertDescription": "Faça login para salvar seu rascunho na nuvem e acessá-lo de qualquer lugar."
   }
 }

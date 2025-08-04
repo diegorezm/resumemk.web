@@ -46,5 +46,9 @@
   "navbar": {
     "signIn": "Sign In",
     "signUp": "Sign Up"
+  },
+  "draft": {
+    "alertTitle": "Want to save your resume?",
+    "alertDescription": "Sign in to sync your draft to the cloud and access it from any device!"
   }
 }
