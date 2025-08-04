@@ -1,0 +1,49 @@
+{
+  "home": {
+    "hero": {
+      "heading": "Bem-vindo ao Resume Maker!",
+      "subheading": "Crie currículos profissionais com <1>Markdown</1> e <3>CSS</3>, sem precisar de habilidades em design.",
+      "primaryButtonSignedIn": "Painel",
+      "primaryButtonGuest": "Comece agora!",
+      "secondaryButton": "Saiba mais"
+    },
+    "features": {
+      "title": "O que o Resume Maker pode fazer?",
+      "items": [
+        {
+          "title": "Editor de Markdown ao Vivo",
+          "description": "Escreva o conteúdo do seu currículo usando Markdown com pré-visualização em tempo real.",
+          "alt": "Demonstração do editor de markdown ao vivo"
+        },
+        {
+          "title": "Estilização CSS Personalizada",
+          "description": "Personalize o design do seu currículo com seus próprios estilos CSS.",
+          "alt": "Estilização CSS ao vivo"
+        },
+        {
+          "title": "Exportar para PDF",
+          "description": "Exporte seu currículo instantaneamente como um PDF limpo e pronto para impressão.",
+          "alt": "Opções de exportação"
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Pronto para criar seu currículo?",
+      "text": "Comece agora — é grátis e não requer cadastro.",
+      "button": "Começar agora"
+    },
+    "templates": {
+      "title": "Templates prontos",
+      "description": "Escolha entre modelos prontos ou crie o seu próprio. Nossos layouts foram projetados para legibilidade e elegância.",
+      "items": [
+        { "title": "Profissional" },
+        { "title": "Cinza Suave" },
+        { "title": "Elegante" }
+      ]
+    }
+  },
+  "navbar": {
+    "signIn": "Entrar",
+    "signUp": "Criar conta"
+  }
+}

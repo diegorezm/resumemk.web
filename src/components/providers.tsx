@@ -12,6 +12,8 @@ import {
 } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ConvexError } from "convex/values";
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/lib/i18n";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 if (!PUBLISHABLE_KEY) {
@@ -71,19 +73,21 @@ export function getContext() {
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider
-      publishableKey={PUBLISHABLE_KEY}
-      signInFallbackRedirectUrl={"/"}
-      signUpFallbackRedirectUrl={"/"}
-    >
-      <ConvexProviderWithClerk
-        client={convexQueryClient.convexClient}
-        useAuth={useAuth}
+    <I18nextProvider i18n={i18n}>
+      <ClerkProvider
+        publishableKey={PUBLISHABLE_KEY}
+        signInFallbackRedirectUrl={"/"}
+        signUpFallbackRedirectUrl={"/"}
       >
-        <QueryClientProvider client={convexQueryClient.queryClient}>
-          {children}
-        </QueryClientProvider>
-      </ConvexProviderWithClerk>
-    </ClerkProvider>
+        <ConvexProviderWithClerk
+          client={convexQueryClient.convexClient}
+          useAuth={useAuth}
+        >
+          <QueryClientProvider client={convexQueryClient.queryClient}>
+            {children}
+          </QueryClientProvider>
+        </ConvexProviderWithClerk>
+      </ClerkProvider>
+    </I18nextProvider>
   );
 }

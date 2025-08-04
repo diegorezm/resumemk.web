@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import type { QueryClient } from "@tanstack/react-query";
 import { Providers } from "@/components/providers.tsx";
 import { Toaster } from "@/components/ui/sonner";
+import { getLocale } from "@/lib/i18n";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -24,6 +25,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         <DefaultCatchBoundary {...props} />
       </RootDocument>
     );
+  },
+  beforeLoad: async () => {
+    const locale = await getLocale();
+    return { locale };
   },
   head: () => ({
     meta: [

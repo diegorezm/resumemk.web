@@ -5,9 +5,11 @@ import { FeaturesSection } from "../components/features-section";
 import { TemplatesSection } from "../components/templates-section";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { Trans, useTranslation } from "react-i18next";
 
 export function HomeView() {
   const auth = useAuth();
+  const { t } = useTranslation();
 
   return (
     <main className="max-w-7xl mx-auto px-4">
@@ -16,20 +18,25 @@ export function HomeView() {
         className="h-[520px] md:h-[600px] lg:h-[880px] w-full flex flex-col mt-52 md:mt-64 lg:justify-center lg:mt-0 items-center text-center space-y-4"
         id="hero"
       >
-        <h1 className="text-5xl font-bold">Welcome to Resume Maker!</h1>
+        <h1 className="text-5xl font-bold">{t("home.hero.heading")}</h1>
         <p className="text-lg text-muted-foreground">
-          Build professional resumes using <strong>Markdown</strong> and{" "}
-          <strong>CSS</strong> no design skills required.
+          <Trans
+            i18nKey="home.hero.subheading"
+            t={t}
+            components={{ 1: <strong />, 3: <strong /> }}
+          />
         </p>
         <div className="space-x-4">
           <Link to={auth.isSignedIn ? "/dashboard" : "/resume/draft"}>
             <Button size="lg">
-              {auth.isSignedIn ? "Dashboard" : "Get started!"}
+              {auth.isSignedIn
+                ? t("home.hero.primaryButtonSignedIn")
+                : t("home.hero.primaryButtonGuest")}
             </Button>
           </Link>
           <a href="#about">
             <Button variant="outline" size="lg">
-              Learn more
+              {t("home.hero.secondaryButton")}
             </Button>
           </a>
         </div>
@@ -39,12 +46,10 @@ export function HomeView() {
       <TemplatesSection />
 
       <section className="py-24 text-center space-y-4">
-        <h2 className="text-3xl font-bold">Ready to build your resume?</h2>
-        <p className="text-muted-foreground">
-          Start now it's free and requires no signup.
-        </p>
+        <h2 className="text-3xl font-bold">{t("home.cta.heading")}</h2>
+        <p className="text-muted-foreground">{t("home.cta.text")}</p>
         <Link to={auth.isSignedIn ? "/dashboard" : "/resume/draft"}>
-          <Button size="lg">Start writing</Button>
+          <Button size="lg">{t("home.cta.button")}</Button>
         </Link>
       </section>
       <Footer />

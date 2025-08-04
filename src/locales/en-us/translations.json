@@ -1,0 +1,50 @@
+{
+  "home": {
+    "hero": {
+      "heading": "Welcome to Resume Maker!",
+      "subheading": "Build professional resumes using <1>Markdown</1> and <3>CSS</3> no design skills required.",
+      "primaryButtonSignedIn": "Dashboard",
+      "primaryButtonGuest": "Get started!",
+      "secondaryButton": "Learn more"
+    },
+
+    "features": {
+      "title": "What can Resume Maker do?",
+      "items": [
+        {
+          "title": "Live Markdown Editor",
+          "description": "Write your resume content using Markdown with real-time preview.",
+          "alt": "Live markdown editor showcase"
+        },
+        {
+          "title": "Custom CSS Styling",
+          "description": "Personalize your resume’s design with your own CSS styles.",
+          "alt": "Live CSS styling"
+        },
+        {
+          "title": "Export to PDF",
+          "description": "Instantly export your resume as a clean, print-ready PDF.",
+          "alt": "Export options"
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Ready to build your resume?",
+      "text": "Start now it's free and requires no signup.",
+      "button": "Start writing"
+    },
+    "templates": {
+      "title": "Beautiful Templates",
+      "description": "Choose from curated templates or create your own. Our layouts are designed for readability and elegance.",
+      "items": [
+        { "title": "Professional" },
+        { "title": "Soft Gray" },
+        { "title": "Fancy" }
+      ]
+    }
+  },
+  "navbar": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  }
+}
