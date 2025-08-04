@@ -19,8 +19,10 @@ export function FeaturesSection() {
         {features.map((feature, i) => (
           <div
             key={feature.title}
-            className={`flex flex-col h-full gap-6 px-4 md:flex-row ${
-              i % 2 !== 0 ? "md:flex-row-reverse" : ""
+            className={`flex border-2 py-2 rounded-md flex-col h-full gap-6 px-4 md:flex-row ${
+              i % 2 !== 0
+                ? "md:flex-row-reverse bg-muted/50 text-muted-foreground"
+                : ""
             } overflow-hidden`}
           >
             <div className="md:w-1/2 w-full">
