@@ -211,7 +211,7 @@ strong {
 
 123 Main Street, Cambridge, MA 02138
 
-(123) 456-7890  [john.doe@email.com](mailto:john.doe@email.com)  [linkedin.com/in/johndoe](http://linkedin.com/in/johndoe)  [github.com/johndoe](http://github.com/johndoe)
+(123) 456-7890  [john.doe@email.com](mailto:john.doe@email.com)  [linkedin.com/in/johndoe](https://linkedin.com/in/johndoe)  [github.com/johndoe](https://github.com/johndoe)
 
 </center>
 
