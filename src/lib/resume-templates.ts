@@ -211,7 +211,7 @@ strong {
 
 123 Main Street, Cambridge, MA 02138
 
-(123) 456-7890  [john.doe@email.com](mailto:john.doe@email.com)  [linkedin.com/in/johndoe](https://linkedin.com/in/johndoe)  [github.com/johndoe](https://github.com/johndoe)
+(123) 456-7890 [john.doe@email.com](mailto:john.doe@email.com) [linkedin.com/in/johndoe](https://linkedin.com/in/johndoe) [github.com/johndoe](https://github.com/johndoe)
 
 </center>
 
@@ -220,7 +220,7 @@ strong {
 ## Education
 
 **Harvard University**, Cambridge, MA
-_Bachelor of Science in Computer Science_  May 2024
+_Bachelor of Science in Computer Science_ May 2024
 - GPA: 3.8/4.0
 - Relevant Coursework: Algorithms, Machine Learning, Systems Programming, Data Structures
 
@@ -229,12 +229,12 @@ _Bachelor of Science in Computer Science_  May 2024
 ## Experience
 
 **Google**, Mountain View, CA
-_Software Engineering Intern_  Summer 2023
+_Software Engineering Intern_ Summer 2023
 - Designed and implemented a dashboard to visualize system health metrics, improving team monitoring by 35%
 - Contributed to backend services using Go and Protocol Buffers
 
 **Harvard Student Agencies**, Cambridge, MA
-_Frontend Developer_  Sep 2021  May 2023
+_Frontend Developer_ Sep 2021 May 2023
 - Developed internal tools for student-run businesses using React and Tailwind CSS
 - Improved site performance by 22% by refactoring legacy code
 
@@ -242,7 +242,7 @@ _Frontend Developer_  Sep 2021  May 2023
 
 ## Projects
 
-**PathFinder**  Visual algorithm simulator
+**PathFinder** Visual algorithm simulator
 - Created an interactive pathfinding visualizer using Dijkstra and A*
 - Over 10,000 users in the first month on GitHub Pages
 
@@ -250,7 +250,7 @@ _Frontend Developer_  Sep 2021  May 2023
 
 ## Leadership & Activities
 
-**Harvard Computer Society**  Events Chair
+**Harvard Computer Society** Events Chair
 - Organized weekly workshops on web development and interview prep
 - Coordinated HackHarvard 2022 with 300+ attendees
 
@@ -291,22 +291,22 @@ body {
 
 ## Education
 
-### University of Pennsylvania  **BS in Computer Science**
-*Sept 2000  May 2005*
+### University of Pennsylvania **BS in Computer Science**
+*Sept 2000    May 2005*
 - GPA: 3.9/4.0 ([link](https://example.com))
 - **Coursework:** Computer Architecture, Learning Algorithms, Computational Theory
 
 
 ## Experience
 
-### Apple  **Software Engineer**
-*Cupertino, CA | June 2005  Aug 2007*
+### Apple  **Software Engineer**
+*Cupertino, CA | June 2005 Aug 2007*
 - Reduced rendering time by 75% via prediction algorithm
 - Integrated iChat with Spotlight Search
 - Redesigned chat file format for backward compatibility
 
-### Microsoft  **Software Engineer Intern**
-*Redmond, WA | June 2003  Aug 2003*
+### Microsoft  **Software Engineer Intern**
+*Redmond, WA | June 2003  Aug 2003*
 - Designed UI for VS file switcher
 - Optimized gradient service with caching
 - Built test generator from XML schemas
@@ -328,7 +328,7 @@ body {
 
 **3D Finite Element Analysis of No-Insulation Coils**
 Frodo Baggins, *John Doe*, Samwise Gamgee
-[10.1109/TASC.2023.3340648](https://doi.org/10.1109/TASC.2023.3340648)  *Jan 2004*
+[10.1109/TASC.2023.3340648](https://doi.org/10.1109/TASC.2023.3340648)  *Jan 2004*
 
 
 ## Technologies
