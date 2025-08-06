@@ -1,6 +1,6 @@
-import { useEffect, type RefObject } from "react";
-import { marked } from "marked";
 import DOMPurify from "dompurify";
+import { marked } from "marked";
+import { type RefObject, useEffect } from "react";
 
 const cssReset = `
   html, body {
@@ -11,6 +11,11 @@ const cssReset = `
     all: unset;
     box-sizing: border-box;
   }
+  hr {
+    margin: 0.5rem 0;
+    border: none;
+    border-top: 1px solid #ccc;
+  }
 `;
 
 interface Props {
@@ -19,6 +24,13 @@ interface Props {
   css: string;
   iframeRef: RefObject<HTMLIFrameElement | null>;
 }
+
+const renderer = new marked.Renderer();
+
+renderer.link = ({ href, title, text }) => {
+  const titleAttr = title ? ` title="${title}"` : "";
+  return `<a href="${href}" target="_blank" rel="noopener noreferrer"${titleAttr}>${text}</a>`;
+};
 
 export function MarkdownPreview({ title, markdown, css, iframeRef }: Props) {
   useEffect(() => {
@@ -30,8 +42,13 @@ export function MarkdownPreview({ title, markdown, css, iframeRef }: Props) {
 
     const html = marked(markdown, {
       async: false,
+      gfm: true,
+      renderer,
     });
-    const sanitizedHTML = DOMPurify.sanitize(html);
+    const sanitizedHTML = DOMPurify.sanitize(html, {
+      ADD_ATTR: ["target", "rel"],
+    });
+
     const fullHtml = `
 			<!DOCTYPE html>
 			<html>

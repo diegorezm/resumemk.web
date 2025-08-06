@@ -24,6 +24,7 @@ import {
 import type { RefObject } from "react";
 import { useOpenEditResumeDialog } from "../../hooks/use-open-edit-resume-dialog";
 import { useOpenDeleteResumeDialog } from "../../hooks/use-open-delete-resume-dialog";
+import { jsPDF } from "jspdf";
 
 interface Props {
   title: string;
@@ -76,28 +77,34 @@ export function ResumeTitleDropdown({
     URL.revokeObjectURL(url);
   }
 
-  function downloadPDF() {
+  async function downloadPDF() {
+    if (typeof window === "undefined") return;
     const iframe = iframeRef.current;
     if (!iframe) return;
 
     const doc = iframe.contentDocument || iframe.contentWindow?.document;
     if (!doc) return;
 
-    const printWindow = window.open("", "_blank", "width=800,height=1000");
-    if (!printWindow) return;
-    const html = doc.documentElement.innerHTML;
+    const fullHtml = `<!DOCTYPE html>\n ${doc.documentElement.outerHTML}`;
+    const html2pdf = (await import("html2pdf.js")).default;
 
-    printWindow.document.open();
-    printWindow.document.writeln(html);
-    printWindow.document.close();
+    const container = document.createElement("div");
+    container.innerHTML = fullHtml;
+    document.body.appendChild(container);
+    await html2pdf()
+      .set({
+        margin: 10,
+        filename: title,
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
+      })
+      .from(container)
+      .save();
 
-    // Wait for content to load before printing
-    printWindow.onload = () => {
-      printWindow.focus();
-      printWindow.print();
-      printWindow.close();
-    };
+    // Cleanup
+    document.body.removeChild(container);
   }
+
   return (
     <div className="flex gap-4 items-center justify-center">
       <Link to="/dashboard">
