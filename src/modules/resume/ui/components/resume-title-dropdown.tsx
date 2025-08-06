@@ -22,9 +22,8 @@ import {
 } from "lucide-react";
 
 import type { RefObject } from "react";
-import { useOpenEditResumeDialog } from "../../hooks/use-open-edit-resume-dialog";
 import { useOpenDeleteResumeDialog } from "../../hooks/use-open-delete-resume-dialog";
-import { jsPDF } from "jspdf";
+import { useOpenEditResumeDialog } from "../../hooks/use-open-edit-resume-dialog";
 
 interface Props {
   title: string;
@@ -82,27 +81,16 @@ export function ResumeTitleDropdown({
     const iframe = iframeRef.current;
     if (!iframe) return;
 
-    const doc = iframe.contentDocument || iframe.contentWindow?.document;
-    if (!doc) return;
-
-    const fullHtml = `<!DOCTYPE html>\n ${doc.documentElement.outerHTML}`;
-    const html2pdf = (await import("html2pdf.js")).default;
-
-    const container = document.createElement("div");
-    container.innerHTML = fullHtml;
-    document.body.appendChild(container);
-    await html2pdf()
-      .set({
-        margin: 10,
-        filename: title,
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
-      })
-      .from(container)
-      .save();
-
-    // Cleanup
-    document.body.removeChild(container);
+    const iframeWindow = iframe.contentWindow;
+    if (
+      iframeWindow &&
+      iframeWindow.downloadPdf !== undefined &&
+      typeof iframeWindow.downloadPdf === "function"
+    ) {
+      iframeWindow.downloadPdf();
+    } else {
+      console.warn("downloadPdf function not available in iframe yet.");
+    }
   }
 
   return (
