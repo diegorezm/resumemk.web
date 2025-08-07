@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@clerk/shared'
+  - '@parcel/watcher'
+  - '@tailwindcss/oxide'
+  - core-js
+  - esbuild
