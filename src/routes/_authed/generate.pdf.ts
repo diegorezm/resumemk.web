@@ -3,6 +3,7 @@ import type { Browser } from "puppeteer-core";
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 import { z } from "zod";
+import { fetchClerkAuth } from "@/lib/auth";
 
 const generatePdfRequestSchema = z.object({
 	html: z.string().min(10).max(100_000),
@@ -12,6 +13,12 @@ export const ServerRoute = createServerFileRoute(
 	"/_authed/generate/pdf",
 ).methods({
 	POST: async ({ request }) => {
+		const { userId } = await fetchClerkAuth();
+		if (!userId) {
+			return new Response("You are not authorized to do this.", {
+				status: 401,
+			});
+		}
 		const body = await request.json();
 		const { html } = await generatePdfRequestSchema.parseAsync(body);
 		let browser: Browser | null = null;
