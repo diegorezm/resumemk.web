@@ -54,6 +54,11 @@ em {
 strong {
   font-weight: bold;
 }
+
+li {
+    margin-left: 1rem;
+    margin-bottom: 0.3rem;
+}
 `;
 
 interface Props {
