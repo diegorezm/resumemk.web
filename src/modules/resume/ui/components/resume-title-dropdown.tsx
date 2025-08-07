@@ -174,9 +174,9 @@ export function ResumeTitleDropdown({
 								<DropdownMenuSubContent>
 									<DropdownMenuItem
 										onClick={downloadPDF}
-										disabled={isGeneratingPdf}
+										disabled={isGeneratingPdf || isDraft}
 									>
-										PDF
+										PDF {isDraft && <span>(Sign In)</span>}
 									</DropdownMenuItem>
 									<DropdownMenuItem onClick={downloadHTML}>
 										HTML
