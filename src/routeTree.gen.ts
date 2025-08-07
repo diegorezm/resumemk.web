@@ -8,6 +8,8 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createServerRootRoute } from "@tanstack/react-start/server";
+
 import { Route as rootRouteImport } from "./routes/__root";
 import { Route as SignUpRouteImport } from "./routes/sign-up";
 import { Route as SignInRouteImport } from "./routes/sign-in";
@@ -16,6 +18,9 @@ import { Route as IndexRouteImport } from "./routes/index";
 import { Route as ResumeDraftRouteImport } from "./routes/resume.draft";
 import { Route as AuthedDashboardRouteImport } from "./routes/_authed/dashboard";
 import { Route as AuthedResumeIdRouteImport } from "./routes/_authed/resume.$id";
+import { ServerRoute as AuthedGeneratePdfServerRouteImport } from "./routes/_authed/generate.pdf";
+
+const rootServerRouteImport = createServerRootRoute();
 
 const SignUpRoute = SignUpRouteImport.update({
   id: "/sign-up",
@@ -50,6 +55,11 @@ const AuthedResumeIdRoute = AuthedResumeIdRouteImport.update({
   id: "/resume/$id",
   path: "/resume/$id",
   getParentRoute: () => AuthedRoute,
+} as any);
+const AuthedGeneratePdfServerRoute = AuthedGeneratePdfServerRouteImport.update({
+  id: "/_authed/generate/pdf",
+  path: "/generate/pdf",
+  getParentRoute: () => rootServerRouteImport,
 } as any);
 
 export interface FileRoutesByFullPath {
@@ -113,6 +123,27 @@ export interface RootRouteChildren {
   SignUpRoute: typeof SignUpRoute;
   ResumeDraftRoute: typeof ResumeDraftRoute;
 }
+export interface FileServerRoutesByFullPath {
+  "/generate/pdf": typeof AuthedGeneratePdfServerRoute;
+}
+export interface FileServerRoutesByTo {
+  "/generate/pdf": typeof AuthedGeneratePdfServerRoute;
+}
+export interface FileServerRoutesById {
+  __root__: typeof rootServerRouteImport;
+  "/_authed/generate/pdf": typeof AuthedGeneratePdfServerRoute;
+}
+export interface FileServerRouteTypes {
+  fileServerRoutesByFullPath: FileServerRoutesByFullPath;
+  fullPaths: "/generate/pdf";
+  fileServerRoutesByTo: FileServerRoutesByTo;
+  to: "/generate/pdf";
+  id: "__root__" | "/_authed/generate/pdf";
+  fileServerRoutesById: FileServerRoutesById;
+}
+export interface RootServerRouteChildren {
+  AuthedGeneratePdfServerRoute: typeof AuthedGeneratePdfServerRoute;
+}
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
@@ -167,6 +198,17 @@ declare module "@tanstack/react-router" {
     };
   }
 }
+declare module "@tanstack/react-start/server" {
+  interface ServerFileRoutesByPath {
+    "/_authed/generate/pdf": {
+      id: "/_authed/generate/pdf";
+      path: "/generate/pdf";
+      fullPath: "/generate/pdf";
+      preLoaderRoute: typeof AuthedGeneratePdfServerRouteImport;
+      parentRoute: typeof rootServerRouteImport;
+    };
+  }
+}
 
 interface AuthedRouteChildren {
   AuthedDashboardRoute: typeof AuthedDashboardRoute;
@@ -191,3 +233,9 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>();
+const rootServerRouteChildren: RootServerRouteChildren = {
+  AuthedGeneratePdfServerRoute: AuthedGeneratePdfServerRoute,
+};
+export const serverRouteTree = rootServerRouteImport
+  ._addFileChildren(rootServerRouteChildren)
+  ._addFileTypes<FileServerRouteTypes>();
